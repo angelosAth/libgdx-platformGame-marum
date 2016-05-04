@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="32" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="tiles.png" width="576" height="32"/>
+ </tileset>
+ <tileset firstgid="19" name="Spritesheet" tilewidth="32" tileheight="32">
+  <image source="Spritesheet.png" width="1792" height="1792"/>
+ </tileset>
+ <tileset firstgid="3155" name="Tiles_64x64" tilewidth="32" tileheight="32">
+  <image source="Tiles_64x64.png" width="512" height="512"/>
+ </tileset>
+ <layer name="background" width="100" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt1TEKg0AQBdDps5v7X84kF9DYG0OmsRREWJH4HvxyYPjFTAQAAAAAAAC01ZWIR+aZeZV2M2zTZ59D5p0ZN3a7ZwagJX/iXPwJ4J9Nedc+btshlq7nzHel81uNKPXYva5q6bpm7joHgFP4AaI+HYU=
+  </data>
+ </layer>
+ <layer name="walls" width="100" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt0SEOwkAUhOE9wLtdceBaBw4cNW1x1JQbwA2oKcdj5FO7LxjS9P+SyZgnNrMpAQAAAAAAAAAAAAAAAAAArMtiKX2UStnZv1+zTX77vfqg1ErDfxR12qi3fEdufPvtj+qTclYu/EfRpI0elu/IjW+//VXdKoNy4z+KntroZfmO3Pj229/VI/8Q9tZWs+U7cuMbv/sCiqxDSA==
+  </data>
+ </layer>
+</map>
