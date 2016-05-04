@@ -1,6 +1,8 @@
 # libgdx-platformGame-marum
 Platform game in libgdx
 
+in progress!!!
+
 
 Attributions 
 ------------
