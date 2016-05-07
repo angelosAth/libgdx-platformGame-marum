@@ -131,7 +131,7 @@ public class GameRenderer {
         game.batch.end();
 
         // render debug rectangles
-        renderDebug();
+        //renderDebug();
     }
 
     private void renderBackground(){

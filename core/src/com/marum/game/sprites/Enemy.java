@@ -37,8 +37,8 @@ public class Enemy {
 
     public Enemy(MarumGame game) {
         this.game = game;
-        WIDTH = 1 / 16f * 32;
-        HEIGHT = 1 / 16f * 32;
+        WIDTH = 1 / 32f * 64;
+        HEIGHT = 1 / 32f * 64;
         GRAVITY = -2.1f;
         MAX_VELOCITY = 10f;
         tiles = new Array<Rectangle>();

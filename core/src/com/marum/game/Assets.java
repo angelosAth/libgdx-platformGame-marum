@@ -55,8 +55,8 @@ public class Assets {
         backGroundRegion = new TextureRegion(background, 0, 0, 800, 480);   //850 600
         atlas = new TextureAtlas("hero.pack");
         // load the map, set the unit scale to 1/16 (1 unit == 16 pixels)
-        map = new TmxMapLoader().load("level3.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / 16f);  // 1 / 32
+        map = new TmxMapLoader().load("level5.tmx");
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / 32f);  // 1 / 32
 
         loadAnimationTextures();
         loadSprites();
@@ -223,7 +223,4 @@ public class Assets {
         atlas.dispose();
         map.dispose();
     }
-
-
-
 }

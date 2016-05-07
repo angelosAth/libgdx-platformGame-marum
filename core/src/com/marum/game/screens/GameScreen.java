@@ -49,7 +49,6 @@ public class GameScreen implements Screen {
             game.setScreen(new MainMenuScreen(game));
     }
 
-
     @Override
     public void resize(int width, int height) {
     }

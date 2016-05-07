@@ -52,9 +52,9 @@ public class Marum {
     public Marum (MarumGame game){
 
         position = new Vector2();
-        position.set(20, 18);
-        WIDTH = 1 / 16f * 32;
-        HEIGHT = 1 / 16f * 42;
+        position.set(15, 18);
+        WIDTH = 1 / 32f * 64;
+        HEIGHT = 1 / 32f * 84;
         MAX_VELOCITY = 10f;
         JUMP_VELOCITY = 32.9f;
         stuckRight = false;

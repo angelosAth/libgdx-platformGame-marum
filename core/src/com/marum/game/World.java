@@ -45,15 +45,15 @@ public class World {
     //jumping off screen when the hero dies
     private Vector2 hitVelocity;
 
-    private int [] platformsArray = {132, 15, 280, 4, 283, 8, 286, 12, 286, 16 };   //platform positions
-    private int[] platformMotion = {1, -1, 1, -1, 0, -1};  //1: moving left, -1: moving right, 0 not moving
-    private int [] invisibleFloorsArray = {81, -1, 83, -1, 85, -1, 87, -1, 89, -1, 91, -1, 93, -1, 95, -1, 97, -1, 99, -1, 101, -1, 103, -1};   //platform positions
-    private int [] fallingPlatformsArray = { 155, 10, 189 ,2 , 194 , 2, 199, 2, 204, 2 };
-    private int [] enemiesArray = {32, 2, 171, 2, 260, 1};
-    private int [] boxesArray = { 1,1, 210, 0, 217, 0};
-    private int [] trapsArray = {267, 1};//{224, 1};
-    private int [] invisiblesArray = {33, 8, 218, 9};
-    private int [] coinArray = {10, 12, 32, 8, 81, 1, 83, 1, 85, 1, 87, 1, 89, 1, 91, 1, 254, 1, 260, 1};
+    private int [] platformsArray = {36, 3, 126, 15};   //platform positions
+    private int[] platformMotion = {1, 1};  //1: moving left, -1: moving right, 0 not moving
+    private int [] invisibleFloorsArray = {198, 0, 200, 0, 202, 0, 204, 0, 206, 0, 208, 0, 210, 0, 212, 0, 214, 0, 216, 0};
+    private int [] fallingPlatformsArray = { 20, 3 , 70, 3, 75, 3, 80, 3, 85, 3, 152, 10 };
+    private int [] enemiesArray = {57, 3};
+    private int [] boxesArray = {};
+    private int [] trapsArray = {1111,111};//{224, 1};
+    private int [] invisiblesArray = {222222,22222};
+    private int [] coinArray = {1, 2, 3, 2, 5, 2, 7, 2, 37, 9, 58, 3, 184, 2, 186, 2, 188, 2, 190, 2, 192, 2, 194, 2};
 
 
     public World(Hud hud, MarumGame game){
