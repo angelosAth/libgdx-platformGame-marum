@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.marum.game.MarumGame;
-import com.marum.game.Tiles;
+import com.marum.game.support.Tiles;
 
 /**
  * Created by angel on 27/3/2016.
@@ -24,16 +24,13 @@ public class Enemy {
 
     private Vector2 position;
     private Vector2 velocity;
-
     private float stateTime;
     private boolean hitWall = false;
-
     private final Rectangle bounds;
     private Array<Rectangle> tiles;
-
     private int startX, startY, endX, endY;
-
     private TextureRegion frames;
+    private int kindOfEnemy;
 
     public Enemy(MarumGame game) {
         this.game = game;
@@ -47,6 +44,7 @@ public class Enemy {
         bounds = new Rectangle(position.x, position.y, WIDTH, HEIGHT);
         tile = new Tiles(game);
         enemyRight = true;
+        kindOfEnemy = 0;
     }
 
     public void update(float delta) {
@@ -58,6 +56,10 @@ public class Enemy {
 
         bounds.x = position.x;
         bounds.y = position.y;
+
+        //which enemy sprite to use, depends on its position
+        if (bounds.x % 2 == 0)
+            kindOfEnemy = 1;
 
         // apply gravity if he is falling
         velocity.add(0, GRAVITY);
@@ -77,7 +79,10 @@ public class Enemy {
     }
 
     private void updateFrames() {
-        frames = game.assets.getEnemy().getKeyFrame(stateTime, true);
+        if (kindOfEnemy == 0)
+            frames = game.assets.getEnemy().getKeyFrame(stateTime, true);
+        else
+            frames = game.assets.getPinkEnemy().getKeyFrame(stateTime, true);
     }
 
     private void motionController() {

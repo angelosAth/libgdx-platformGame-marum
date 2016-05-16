@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.marum.game.MarumGame;
-import com.marum.game.Tiles;
+import com.marum.game.support.Tiles;
 
 
 /**
@@ -26,11 +26,12 @@ public class Marum {
     private boolean stuckRight;
     private boolean stuckLeft;
     private final float GRAVITY;
+    private int startX, startY, endX, endY;
     //private boolean boxJump = false;    //check
     private boolean die;
 
     private enum State {
-        STANDING, RUNNING, JUMPING
+        STANDING, RUNNING, JUMPING, HIT
     }
 
     private final Vector2 position;
@@ -41,18 +42,15 @@ public class Marum {
     private boolean heroRight;
     private boolean grounded;
     private Rectangle bounds;
-
     private Tiles tile;
     private MarumGame game;
     private Array<Rectangle> tiles;
     private TextureRegion frames;
 
 
-
     public Marum (MarumGame game){
-
         position = new Vector2();
-        position.set(15, 18);
+        position.set(15, 13); //15, 13
         WIDTH = 1 / 32f * 64;
         HEIGHT = 1 / 32f * 84;
         MAX_VELOCITY = 10f;
@@ -97,17 +95,95 @@ public class Marum {
         // in this frame
         velocity.scl(delta);
 
+        collisionDetectionXaxis();
+        collisionDetectionYaxis();
+
+        position.add(velocity);
+        velocity.scl(1 / delta);
+
+        // Apply damping to the velocity on the x-axis so we don't
+        // walk infinitely once a key was pressed
+        velocity.x *= DAMPING;
+
+        dieDelay(delta);
+        updateFrames();
+        inputController();
+    }
+
+    private boolean isTouched (float startX, float endX) {
+        // Check for touch inputs between startX and endX
+        // startX/endX are given between 0 (left edge of the screen) and 1 (right edge of the screen)
+        for (int i = 0; i < 2; i++) {
+            float x = Gdx.input.getX(i) / (float)Gdx.graphics.getWidth();
+            if (Gdx.input.isTouched(i) && (x >= startX && x <= endX)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void updateFrames(){
+        if (state == State.RUNNING) {
+            frames = game.assets.getHeroRun().getKeyFrame(stateTime, true);
+        }
+        if (state == State.STANDING) {
+            frames = game.assets.getHeroStand().getKeyFrame(stateTime, true);
+        }
+        if (state == State.JUMPING) {
+            frames = game.assets.getHeroJump().getKeyFrame(stateTime, true);
+        }
+        if (state == State.HIT) {
+            frames = game.assets.getHeroHit();
+        }
+    }
+
+    private void inputController(){
+        if ((Gdx.input.isKeyJustPressed(Input.Keys.UP) || isTouched(0.5f, 1)) && grounded) {
+            game.assets.getJumpSound().play();
+            velocity.y += JUMP_VELOCITY;
+            state = State.JUMPING;
+            grounded = false;
+            //boxJump = true;
+            stuckLeft = false;
+            stuckRight = false;
+        }
+
+        if((Gdx.input.isKeyPressed(Input.Keys.LEFT) || isTouched(0, 0.25f)) && !stuckLeft){
+            velocity.x = -MAX_VELOCITY;
+            if (grounded)
+                state = State.RUNNING;
+            heroRight = false;
+            stuckRight = false;
+        }
+        if((Gdx.input.isKeyPressed(Input.Keys.RIGHT)|| isTouched(0.25f, 0.5f)) && !stuckRight){
+            if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT))
+                velocity.x = MAX_VELOCITY / 5;
+            else
+                velocity.x = MAX_VELOCITY;
+            if (grounded)
+                state = State.RUNNING;
+            heroRight = true;
+            stuckLeft = false;
+        }
+    }
+
+    public void setBounds(float delta){
+        bounds.y += velocity.y * delta;
+        bounds.x += velocity.x * delta;
+    }
+
+    private void collisionDetectionXaxis() {
+
         // perform collision detection & response, on each axis, separately
         // if the hero is moving right, check the tiles to the right of it's
         // right bounding box edge, otherwise check the ones to the left
-        int startX, startY, endX, endY;
         if (velocity.x > 0) {
-            startX = endX = (int)(position.x + WIDTH + velocity.x);
+            startX = endX = (int) (position.x + WIDTH + velocity.x);
         } else {
-            startX = endX = (int)(position.x + velocity.x);
+            startX = endX = (int) (position.x + velocity.x);
         }
-        startY = (int)(position.y);
-        endY = (int)(position.y + HEIGHT);
+        startY = (int) (position.y);
+        endY = (int) (position.y + HEIGHT);
 
         tile.getTiles(startX, startY, endX, endY, tiles);
 
@@ -119,7 +195,9 @@ public class Marum {
             }
         }
         bounds.x = position.x;
+    }
 
+    private void collisionDetectionYaxis() {
         // if the hero is moving upwards, check the tiles to the top of its
         // top bounding box edge, otherwise check the ones to the bottom
         if (velocity.y > 0) {
@@ -152,70 +230,14 @@ public class Marum {
                 break;
             }
         }
+    }
 
-        position.add(velocity);
-        velocity.scl(1 / delta);
-
-        // Apply damping to the velocity on the x-axis so we don't
-        // walk infinitely once a key was pressed
-        velocity.x *= DAMPING;
-
-        //we use it in order to gain some seconds before going to main screen
-        if (die)
+    private void dieDelay(float delta){
+        if (die) {
+            //we use it in order to gain some seconds before going to main screen
             delayTime += delta;
-
-        updateFrames();
-        inputController();
-    }
-
-    private void updateFrames(){
-
-        if (state == State.RUNNING) {
-            frames = game.assets.getHeroRun().getKeyFrame(stateTime, true);
+            state = State.HIT;
         }
-        if (state == State.STANDING) {
-            frames = game.assets.getHeroStand().getKeyFrame(stateTime, true);
-        }
-
-        if (state == State.JUMPING) {
-            frames = game.assets.getHeroJump().getKeyFrame(stateTime, true);
-        }
-    }
-
-    private void inputController(){
-
-        if ((Gdx.input.isKeyPressed(Input.Keys.UP) && grounded)) {
-            game.assets.getJumpSound().play();
-            velocity.y += JUMP_VELOCITY;
-            state = State.JUMPING;
-            grounded = false;
-            //boxJump = true;
-            stuckLeft = false;
-            stuckRight = false;
-        }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && !stuckLeft){
-            velocity.x = -MAX_VELOCITY;
-            if (grounded)
-                state = State.RUNNING;
-            heroRight = false;
-            stuckRight = false;
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !stuckRight){
-            if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT))
-                velocity.x = MAX_VELOCITY / 5;
-            else
-                velocity.x = MAX_VELOCITY;
-            if (grounded)
-                state = State.RUNNING;
-            heroRight = true;
-            stuckLeft = false;
-        }
-    }
-
-    public void setBounds(float delta){
-        bounds.y += velocity.y * delta;
-        bounds.x += velocity.x * delta;
     }
 
     public Rectangle getBounds(){

@@ -45,14 +45,14 @@ public class World {
     //jumping off screen when the hero dies
     private Vector2 hitVelocity;
 
-    private int [] platformsArray = {36, 3, 126, 15};   //platform positions
-    private int[] platformMotion = {1, 1};  //1: moving left, -1: moving right, 0 not moving
+    private int [] platformsArray = {36, 3, 126, 15, 291, 4, 322, 10, 327, 14, 335, 18, 348, 21, 363, 17};   //platform positions
+    private int[] platformMotion = {1, 1, -1, 1, -1, 1, -1, 0};  //1: starting moving from left, -1: moving right, 0: not moving
     private int [] invisibleFloorsArray = {198, 0, 200, 0, 202, 0, 204, 0, 206, 0, 208, 0, 210, 0, 212, 0, 214, 0, 216, 0};
     private int [] fallingPlatformsArray = { 20, 3 , 70, 3, 75, 3, 80, 3, 85, 3, 152, 10 };
-    private int [] enemiesArray = {57, 3};
-    private int [] boxesArray = {};
-    private int [] trapsArray = {1111,111};//{224, 1};
-    private int [] invisiblesArray = {222222,22222};
+    private int [] enemiesArray = {57, 2, 262, 3, 305, 10};//, 269, 3};
+    private int [] boxesArray = {171, 3, 241, 2};
+    private int [] trapsArray = {178, 2};
+    private int [] invisiblesArray = {304, 13};
     private int [] coinArray = {1, 2, 3, 2, 5, 2, 7, 2, 37, 9, 58, 3, 184, 2, 186, 2, 188, 2, 190, 2, 192, 2, 194, 2};
 
 
@@ -95,7 +95,7 @@ public class World {
         }
 
         for (Trap trap : traps){
-            trap.update();
+            trap.update(delta);
         }
 
         for (Invisible invisible : invisibles){
@@ -139,7 +139,7 @@ public class World {
                     }
                 }
 
-                if (marum.getPosition().y > box.getPosition().y && marum.getVelocity().y < 0) {  //so dont jump double distance
+                if (marum.getPosition().y > box.getPosition().y && marum.getVelocity().y < 0) {  //in ordero to not jump double distance
 
                     marum.getPosition().y = box.getPosition().y + box.getHEIGHT();
                     marum.setGrounded(true);
@@ -207,8 +207,6 @@ public class World {
             }
         }
     }
-
-
 
     private void heroInvisibleInteraction(){
         for (Invisible  invisible : invisibles){

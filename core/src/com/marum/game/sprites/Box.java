@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.marum.game.MarumGame;
-import com.marum.game.Tiles;
+import com.marum.game.support.Tiles;
 
 /**
  * Created by angel on 25/3/2016.

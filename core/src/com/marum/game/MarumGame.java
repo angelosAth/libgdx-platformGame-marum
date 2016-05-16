@@ -3,6 +3,7 @@ package com.marum.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.marum.game.screens.MainMenuScreen;
+import com.marum.game.support.Assets;
 
 
 public class MarumGame extends Game {
@@ -17,6 +18,7 @@ public class MarumGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		assets = new Assets();
+
         // we start with the sound enabled
 		soundEnabled = true;
 		setScreen(new MainMenuScreen(this));

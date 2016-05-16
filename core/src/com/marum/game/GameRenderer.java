@@ -48,11 +48,14 @@ public class GameRenderer {
 
         // let the camera follow the hero if he is not dead
         //cam.position.y = world.getMarum().position.y;
-        if (world.getMarum().getPosition().x > 284) {
-            cam.position.y = world.getMarum().getPosition().y + 5;  //correction for camera jumping
-        }
-        else if (!world.getMarum().isDead())
+        if (world.getMarum().getPosition(). x > 318 && world.getMarum().getPosition().y > 17) {  //camera start to follow hero y and x axis
+            cam.position.y = world.getMarum().getPosition().y - 6;  //correction for camera jumping
             cam.position.x = world.getMarum().getPosition().x;
+        }
+        else if (!world.getMarum().isDead()) {
+            cam.position.x = world.getMarum().getPosition().x;
+           // cam.position.y = 10;
+        }
         cam.update();
 
         // set the TiledMapRenderer view based on what the

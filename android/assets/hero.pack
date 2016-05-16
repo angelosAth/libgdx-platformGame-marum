@@ -3,297 +3,241 @@ hero.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+hit
+  rotate: false
+  xy: 1, 200
+  size: 514, 806
+  orig: 514, 806
+  offset: 0, 0
+  index: -1
+Idle1
+  rotate: false
+  xy: 517, 316
+  size: 483, 690
+  orig: 483, 690
+  offset: 0, 0
+  index: -1
 surp
   rotate: false
-  xy: 1, 701
+  xy: 517, 1
   size: 467, 313
   orig: 467, 313
   offset: 0, 0
   index: -1
-marum
-  rotate: false
-  xy: 470, 758
-  size: 512, 256
-  orig: 512, 256
-  offset: 0, 0
-  index: -1
-bad3
-  rotate: false
-  xy: 1, 330
-  size: 369, 369
-  orig: 369, 369
-  offset: 0, 0
-  index: -1
-bad1
-  rotate: false
-  xy: 1, 72
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-bad4
-  rotate: false
-  xy: 372, 330
-  size: 369, 369
-  orig: 369, 369
-  offset: 0, 0
-  index: -1
-bad2
-  rotate: false
-  xy: 259, 72
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
 platform2
   rotate: false
-  xy: 1, 1
+  xy: 1, 129
   size: 295, 69
   orig: 295, 69
   offset: 0, 0
   index: -1
 play
   rotate: false
-  xy: 517, 264
+  xy: 298, 134
   size: 128, 64
   orig: 128, 64
   offset: 0, 0
   index: -1
-Jump4
-  rotate: false
-  xy: 517, 178
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Jump8
-  rotate: false
-  xy: 517, 92
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Jump9
-  rotate: false
-  xy: 583, 178
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Idle9
-  rotate: false
-  xy: 583, 92
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
 noSound
   rotate: false
-  xy: 647, 264
+  xy: 428, 134
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-Run7
-  rotate: false
-  xy: 649, 178
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Run4
-  rotate: false
-  xy: 649, 92
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
 sound
   rotate: false
-  xy: 298, 6
+  xy: 298, 68
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 coin2
   rotate: false
-  xy: 364, 6
+  xy: 364, 68
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 coin3
   rotate: false
-  xy: 430, 6
+  xy: 430, 68
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 box
   rotate: false
-  xy: 713, 264
+  xy: 1, 63
   size: 64, 64
   orig: 64, 64
-  offset: 0, 0
-  index: -1
-Run5
-  rotate: false
-  xy: 715, 178
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Idle3
-  rotate: false
-  xy: 715, 92
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Run3
-  rotate: false
-  xy: 743, 672
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Run1
-  rotate: false
-  xy: 743, 586
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Idle1
-  rotate: false
-  xy: 809, 672
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Idle7
-  rotate: false
-  xy: 743, 500
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Jump2
-  rotate: false
-  xy: 809, 586
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Idle8
-  rotate: false
-  xy: 875, 672
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Idle2
-  rotate: false
-  xy: 743, 414
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Run6
-  rotate: false
-  xy: 809, 500
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Idle6
-  rotate: false
-  xy: 875, 586
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Jump7
-  rotate: false
-  xy: 809, 414
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Idle4
-  rotate: false
-  xy: 875, 500
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Jump10
-  rotate: false
-  xy: 875, 414
-  size: 64, 84
-  orig: 64, 84
   offset: 0, 0
   index: -1
 coin1
   rotate: false
-  xy: 743, 348
+  xy: 67, 63
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-Jump5
+
+hero2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Jump2
   rotate: false
-  xy: 809, 328
-  size: 64, 84
-  orig: 64, 84
+  xy: 1, 248
+  size: 546, 765
+  orig: 546, 765
   offset: 0, 0
   index: -1
-Run8
+Run4
   rotate: false
-  xy: 875, 328
-  size: 64, 84
-  orig: 64, 84
+  xy: 549, 259
+  size: 457, 754
+  orig: 457, 754
   offset: 0, 0
   index: -1
-Jump6
+bad1
   rotate: false
-  xy: 941, 672
-  size: 64, 84
-  orig: 64, 84
+  xy: 549, 1
+  size: 256, 256
+  orig: 256, 256
   offset: 0, 0
   index: -1
+
+hero3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
 Jump1
   rotate: false
-  xy: 941, 586
-  size: 64, 84
-  orig: 64, 84
+  xy: 1, 248
+  size: 546, 765
+  orig: 546, 765
   offset: 0, 0
   index: -1
+Run5
+  rotate: false
+  xy: 549, 259
+  size: 457, 754
+  orig: 457, 754
+  offset: 0, 0
+  index: -1
+bad2
+  rotate: false
+  xy: 549, 1
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+
+hero4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Run3
+  rotate: false
+  xy: 1, 259
+  size: 457, 754
+  orig: 457, 754
+  offset: 0, 0
+  index: -1
+marum
+  rotate: false
+  xy: 1, 1
+  size: 512, 256
+  orig: 512, 256
+  offset: 0, 0
+  index: -1
+Run1
+  rotate: false
+  xy: 460, 259
+  size: 457, 754
+  orig: 457, 754
+  offset: 0, 0
+  index: -1
+
+hero5.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Run6
+  rotate: false
+  xy: 1, 167
+  size: 457, 754
+  orig: 457, 754
+  offset: 0, 0
+  index: -1
+bad5
+  rotate: false
+  xy: 460, 462
+  size: 540, 459
+  orig: 540, 459
+  offset: 0, 0
+  index: -1
+bad6
+  rotate: false
+  xy: 460, 1
+  size: 540, 459
+  orig: 540, 459
+  offset: 0, 0
+  index: -1
+
+hero6.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bad7
+  rotate: false
+  xy: 1, 372
+  size: 683, 611
+  orig: 683, 611
+  offset: 0, 0
+  index: -1
+bad3
+  rotate: false
+  xy: 1, 1
+  size: 369, 369
+  orig: 369, 369
+  offset: 0, 0
+  index: -1
+bad4
+  rotate: false
+  xy: 372, 1
+  size: 369, 369
+  orig: 369, 369
+  offset: 0, 0
+  index: -1
+
+hero7.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
 Run2
   rotate: false
-  xy: 941, 500
-  size: 64, 84
-  orig: 64, 84
+  xy: 1, 1
+  size: 457, 754
+  orig: 457, 754
   offset: 0, 0
   index: -1
-Idle5
+Idle2
   rotate: false
-  xy: 941, 414
-  size: 64, 84
-  orig: 64, 84
+  xy: 460, 65
+  size: 483, 690
+  orig: 483, 690
   offset: 0, 0
   index: -1
-Idle10
+
+hero8.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bad8
   rotate: false
-  xy: 941, 328
-  size: 64, 84
-  orig: 64, 84
-  offset: 0, 0
-  index: -1
-Jump3
-  rotate: false
-  xy: 517, 6
-  size: 64, 84
-  orig: 64, 84
+  xy: 1, 1
+  size: 683, 611
+  orig: 683, 611
   offset: 0, 0
   index: -1

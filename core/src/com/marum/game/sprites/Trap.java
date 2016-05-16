@@ -21,21 +21,30 @@ public class Trap {
 
     public Trap(MarumGame game) {
         this.game = game;
+        stateTime = 0;
         WIDTH = 1 / 16f * 32;
         HEIGHT = 1 / 16f * 32;
         position = new Vector2();
         bounds = new Rectangle(position.x, position.y, WIDTH, HEIGHT);
-        loadFrames();
+
     }
 
-    public void update() {
+    public void update(float delta) {
+        if (delta == 0) return;
+
+        if (delta > 0.1f)
+            delta = 0.1f;
+
+        stateTime += delta;
         bounds.x = position.x;
         bounds.y = position.y;
+
+        updateFrames();
     }
 
-    private void loadFrames() {
+    private void updateFrames() {
         sprite = game.assets.getBox();
-        spriteAfter = game.assets.getEnemy().getKeyFrame(stateTime, true);
+        spriteAfter = game.assets.getHiddenEnemy().getKeyFrame(stateTime, true);
     }
     
     public TextureRegion getSprite(){
