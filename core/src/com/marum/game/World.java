@@ -40,7 +40,7 @@ public class World {
     private final List<Trap> traps;
     private final List<Invisible> invisibles;
     private final List<Coin> coins;
-    //hero doesnt hit wall while on platform
+    //hero doesn't hit wall while on platform
     private boolean isWallFree = true;
     //jumping off screen when the hero dies
     private Vector2 hitVelocity;
@@ -98,14 +98,6 @@ public class World {
             trap.update(delta);
         }
 
-        for (Invisible invisible : invisibles){
-            invisible.update(); //invisible obstruction
-        }
-
-        for (InvisibleFloor invisibleFloor : invisibleFloors){
-            invisibleFloor.update();
-        }
-
         for (Coin coin : coins){
             coin.update(delta);
         }
@@ -139,9 +131,9 @@ public class World {
                     }
                 }
 
-                if (marum.getPosition().y > box.getPosition().y && marum.getVelocity().y < 0) {  //in ordero to not jump double distance
+                if (marum.getPosition().y > box.getPosition().y && marum.getVelocity().y < 0) {  //in order to not jump double distance
 
-                    marum.getPosition().y = box.getPosition().y + box.getHEIGHT();
+                    marum.getPosition().y = box.getPosition().y + box.getHeight();
                     marum.setGrounded(true);
                     marum.getVelocity().y = 0;
 
@@ -177,7 +169,7 @@ public class World {
 
                 if (marum.getPosition().y > platform.getPosition().y && marum.getVelocity().y < 0) {  //so dont jump double distance
 
-                    marum.getPosition().y = platform.getPosition().y + platform.getHEIGHT();
+                    marum.getPosition().y = platform.getPosition().y + platform.getHeight();
                     marum.setGrounded(true);
                     marum.getVelocity().y = 0;
                     // doesn't hit wall while on platform
@@ -201,7 +193,7 @@ public class World {
         for (FallingPlatform fallingPlatform : fallingPlatforms){
             if (marum.getBounds().overlaps(fallingPlatform.getBounds())) {
                fallingPlatform.fallingDown();
-                marum.getPosition().y = fallingPlatform.getPosition().y + fallingPlatform.getHEIGHT();
+                marum.getPosition().y = fallingPlatform.getPosition().y + fallingPlatform.getHeight();
                 marum.setGrounded(true);
                 marum.getVelocity().y = 0;
             }
@@ -225,7 +217,7 @@ public class World {
         for (InvisibleFloor invisibleFloor : invisibleFloors){
             if (marum.getBounds().overlaps(invisibleFloor.getBounds())) {
                 invisibleFloor.setIsHit(true);
-                marum.getPosition().y = invisibleFloor.getPosition().y + invisibleFloor.getHEIGHT();
+                marum.getPosition().y = invisibleFloor.getPosition().y + invisibleFloor.getHeight();
                 marum.setGrounded(true);
                 marum.getVelocity().y = 0;
             }
@@ -239,7 +231,7 @@ public class World {
     }
 
 
-    // creation of the world's object's
+    // creation of the world's objects
     private void worldCreation(){
         int j = 0;  // for the direction of platform
         for (int i = 0; i < platformsArray.length - 1; i += 2) {
