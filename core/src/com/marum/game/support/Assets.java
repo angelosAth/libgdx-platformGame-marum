@@ -54,7 +54,7 @@ public class Assets {
 
 
     public Assets() {
-        background = loadTexture("back3.png");
+        background = loadTexture("background/back3.png");
         backGroundRegion = new TextureRegion(background, 0, 0, 800, 480);   //850 600
         atlas = new TextureAtlas("hero.pack");
         // load the map, set the unit scale to 1/32 (1 unit == 32 pixels)
@@ -126,20 +126,20 @@ public class Assets {
 
     //load game sound effects and music
     private void loadSound(){
-        music = Gdx.audio.newMusic(Gdx.files.internal("skies.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("sound/skies.mp3"));
         music.setLooping(true);
         music.setVolume(0.5f);
 
-        gameMusic = Gdx.audio.newMusic(Gdx.files.internal("gameMusic.mp3"));
+        gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sound/gameMusic.mp3"));
         gameMusic.setLooping(true);
         gameMusic.setVolume(0.3f);
 
-        fallSound = Gdx.audio.newSound(Gdx.files.internal("fall.wav"));
-        hitSound = Gdx.audio.newSound(Gdx.files.internal("hit.wav"));
+        fallSound = Gdx.audio.newSound(Gdx.files.internal("sound/fall.wav"));
+        hitSound = Gdx.audio.newSound(Gdx.files.internal("sound/hit.wav"));
 
-        jumpSound = Gdx.audio.newSound(Gdx.files.internal("jump.wav"));
-        coinSound = Gdx.audio.newSound(Gdx.files.internal("coin.wav"));
-        clickSound = Gdx.audio.newSound(Gdx.files.internal("click.wav"));
+        jumpSound = Gdx.audio.newSound(Gdx.files.internal("sound/jump.wav"));
+        coinSound = Gdx.audio.newSound(Gdx.files.internal("sound/coin.wav"));
+        clickSound = Gdx.audio.newSound(Gdx.files.internal("sound/click.wav"));
     }
 
     private Texture loadTexture (String file) {

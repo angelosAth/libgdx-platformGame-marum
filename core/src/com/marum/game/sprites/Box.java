@@ -19,6 +19,7 @@ public class Box extends DynamicGameSprite{
         loadSprite();
     }
 
+    @Override
     public void update(float delta) {
         updateParent(delta);
         // apply gravity if it's falling

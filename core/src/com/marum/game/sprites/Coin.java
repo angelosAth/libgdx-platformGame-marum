@@ -18,11 +18,11 @@ public class Coin extends GameSprite{
         this.game = game;
     }
 
+    @Override
     public void update(float delta) {
         updateParent(delta);
         updateFrames();
     }
-
 
     private void updateFrames() {
         frames = game.assets.getCoin().getKeyFrame(stateTime, true);

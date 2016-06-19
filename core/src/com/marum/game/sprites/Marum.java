@@ -15,20 +15,13 @@ import com.marum.game.MarumGame;
  */
 public class Marum extends DynamicGameSprite{
 
-    private static float WIDTH = 1 / 32f * 64;
-    private static float HEIGHT = 1 / 32f * 84;
+    private static final float WIDTH = 1 / 32f * 64;
+    private static final float HEIGHT = 1 / 32f * 84;
     private float MAX_VELOCITY;
     private float JUMP_VELOCITY;
     private boolean stuckRight;
     private boolean stuckLeft;
-
-    //private boolean boxJump = false;    //check
     private boolean die;
-
-    private enum State {
-        STANDING, RUNNING, JUMPING, HIT
-    }
-
     private State state;
     private float delayTime;
     private boolean heroRight;
@@ -38,7 +31,7 @@ public class Marum extends DynamicGameSprite{
 
     public Marum (MarumGame game){
         super(WIDTH, HEIGHT, game);
-        position.set(240, 13); //15, 13
+        position.set(15, 13); //240, 13
         MAX_VELOCITY = 10f;
         JUMP_VELOCITY = 32.9f;
         stuckRight = false;
@@ -51,8 +44,12 @@ public class Marum extends DynamicGameSprite{
         this.bounds = new Rectangle(position.x, position.y, WIDTH , HEIGHT);
     }
 
-    public void update (float delta){
+    private enum State {
+        STANDING, RUNNING, JUMPING, HIT
+    }
 
+    @Override
+    public void update (float delta){
         updateParent(delta);
         bounds.setPosition(position);
         velocity.add(0, GRAVITY);
@@ -89,18 +86,18 @@ public class Marum extends DynamicGameSprite{
     }
 
     private void updateFrames(){
-
-        if (state == State.RUNNING) {
-            frames = game.assets.getHeroRun().getKeyFrame(stateTime, true);
-        }
-        if (state == State.STANDING) {
-            frames = game.assets.getHeroStand().getKeyFrame(stateTime, true);
-        }
-        if (state == State.JUMPING) {
-            frames = game.assets.getHeroJump().getKeyFrame(stateTime, true);
-        }
-        if (state == State.HIT) {
-            frames = game.assets.getHeroHit();
+        switch(state){
+            case RUNNING:
+                frames = game.assets.getHeroRun().getKeyFrame(stateTime, true);
+                break;
+            case JUMPING:
+                frames = game.assets.getHeroJump().getKeyFrame(stateTime, true);
+                break;
+            case HIT:
+                frames = game.assets.getHeroHit();
+                break;
+            default:
+                frames = game.assets.getHeroStand().getKeyFrame(stateTime, true);
         }
     }
 
@@ -127,7 +124,7 @@ public class Marum extends DynamicGameSprite{
         }
 
         if ((Gdx.input.isKeyPressed(Input.Keys.RIGHT)|| isTouched(0.25f, 0.5f)) && !stuckRight){
-
+            //slower walking
             if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT))
                 velocity.x = MAX_VELOCITY / 5;
             else
@@ -137,6 +134,7 @@ public class Marum extends DynamicGameSprite{
             heroRight = true;
             stuckLeft = false;
         }
+
     }
 
     private boolean isTouched (float startX, float endX) {

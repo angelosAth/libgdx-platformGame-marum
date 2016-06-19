@@ -28,8 +28,8 @@ public class Platform extends DynamicGameSprite{
         loadSprite();
     }
 
+    @Override
     public void update(float delta) {
-
         updateParent(delta);
 
         if (initial == 0){
@@ -37,9 +37,7 @@ public class Platform extends DynamicGameSprite{
             velocity.x *= motion;   // for left, right or still
             initial = 1;
         }
-
         position.add(velocity);
-
         motionController();
     }
 

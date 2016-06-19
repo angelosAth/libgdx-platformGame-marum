@@ -6,12 +6,12 @@ package com.marum.game.sprites;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class GameSprite {
-    public final Vector2 position;
-    public Rectangle bounds;
-    public float width;
-    public float height;
-    public float stateTime;
+public abstract class GameSprite {
+    protected final Vector2 position;
+    protected Rectangle bounds;
+    protected float width;
+    protected float height;
+    protected float stateTime;
 
 
     public GameSprite (float width, float height) {
@@ -20,6 +20,8 @@ public class GameSprite {
         this.height = height;
         stateTime = 0;
     }
+
+    public abstract void update(float delta);
 
     public void updateParent(float delta) {
         if (delta == 0) return;

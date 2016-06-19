@@ -27,6 +27,7 @@ public class Enemy extends DynamicGameSprite{
         kindOfEnemy = 0;
     }
 
+    @Override
     public void update(float delta) {
         updateParent(delta);
         //which enemy sprite to use, depends on its position

@@ -20,7 +20,8 @@ public class FallingPlatform extends DynamicGameSprite{
         loadSprite();
     }
 
-    public void update() {
+    @Override
+    public void update(float delta) {
         position.add(velocity);
     }
 

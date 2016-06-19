@@ -19,6 +19,7 @@ public class Trap extends GameSprite{
         this.game = game;
     }
 
+    @Override
     public void update(float delta) {
         updateParent(delta);
         updateFrames();

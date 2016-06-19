@@ -23,6 +23,11 @@ public class Invisible extends GameSprite{
         loadSprite();
     }
 
+    @Override
+    public void update(float delta){
+
+    }
+
     private void loadSprite() {
         sprite = game.assets.getSurprise();
     }

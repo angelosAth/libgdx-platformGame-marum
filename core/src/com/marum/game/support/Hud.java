@@ -34,11 +34,12 @@ public class Hud implements Disposable{
     private Label levelLabel;
     private Label coinsLabel;
     private Label marumLabel;
+    private Label pausedLabel;
 
 
     public Hud (MarumGame game){
         //define our tracking variables
-        worldTimer = 300;
+        worldTimer = 90;
         timeCount = 0;
         score = 0;
 
@@ -61,6 +62,8 @@ public class Hud implements Disposable{
         levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         marumLabel = new Label("MARUM", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         coinsLabel = new Label("COINS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        pausedLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
 
         //add our labels to our table, padding the top, and giving them all equal width with expandX
         table.add(coinsLabel).expandX().padTop(10);
@@ -71,6 +74,9 @@ public class Hud implements Disposable{
         table.add(scoreLabel).expandX();
         table.add(levelLabel).expandX();
         table.add(countdownLabel).expandX();
+        //third row for pausing label
+        table.row();
+        table.add(pausedLabel).colspan(10).padTop(40);
 
         //add our table to the stage
         stage.addActor(table);
@@ -87,6 +93,10 @@ public class Hud implements Disposable{
             countdownLabel.setText(String.format("%03d", worldTimer));
             timeCount = 0;
         }
+    }
+
+    public void paused(String pause){
+        pausedLabel.setText(pause);
     }
 
     public void addScore(int value){

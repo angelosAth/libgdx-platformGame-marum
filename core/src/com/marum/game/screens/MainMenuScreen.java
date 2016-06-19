@@ -48,7 +48,7 @@ public class MainMenuScreen implements Screen{
         game.batch.disableBlending();
         game.batch.begin();
         //draw main's menu background
-        game.batch.draw(game.assets.getBackGroundRegion(), 0, 0, 800, 480);
+        game.batch.draw(game.assets.getBackGroundRegion(), 0, 0, 860, 484); //800 480
         game.batch.end();
         game.batch.enableBlending();
         game.batch.begin();

@@ -1,6 +1,8 @@
 package com.marum.game.screens;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.marum.game.GameRenderer;
 import com.marum.game.MarumGame;
@@ -16,6 +18,7 @@ public class GameScreen implements Screen {
     private GameRenderer renderer;
     private Hud hud;
     private final float DEATHDELAY;
+    public static boolean paused = false;
 
     public GameScreen (MarumGame game) {
         this.game = game;
@@ -41,9 +44,16 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        world.update(delta);
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) paused = paused ? false : true;
+
+        if(!paused) {
+            world.update(delta);
+            hud.update(delta);
+            hud.paused("");
+        }else hud.paused("PAUSED");
+
         renderer.render(hud);
-        hud.update(delta);
         // when hero dies go to the main menu screen
         if (world.getMarum().isDead() && world.getMarum().getDelayTime() > DEATHDELAY)
             game.setScreen(new MainMenuScreen(game));

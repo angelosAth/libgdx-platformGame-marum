@@ -5,6 +5,7 @@ import com.marum.game.sprites.Box;
 import com.marum.game.sprites.Coin;
 import com.marum.game.sprites.Enemy;
 import com.marum.game.sprites.FallingPlatform;
+import com.marum.game.sprites.GameSprite;
 import com.marum.game.sprites.Invisible;
 import com.marum.game.sprites.InvisibleFloor;
 import com.marum.game.sprites.Marum;
@@ -13,6 +14,7 @@ import com.marum.game.sprites.Trap;
 import com.marum.game.support.Hud;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -32,28 +34,55 @@ public class World {
     private InvisibleFloor invisibleFloor;
     private Coin coin;
 
-    private final List<InvisibleFloor> invisibleFloors;
-    private final List<Platform> platforms;
-    private final List<FallingPlatform> fallingPlatforms;
-    private final List<Enemy> enemies;
-    private final List<Box> boxes;
-    private final List<Trap> traps;
-    private final List<Invisible> invisibles;
-    private final List<Coin> coins;
+    private List<InvisibleFloor> invisibleFloors;
+    private List<Platform> platforms;
+    private List<FallingPlatform> fallingPlatforms;
+    private List<Enemy> enemies;
+    private List<Box> boxes;
+    private List<Trap> traps;
+    private List<Invisible> invisibles;
+    private List<Coin> coins;
+    private List<GameSprite> gameObjects;
+
     //hero doesn't hit wall while on platform
     private boolean isWallFree = true;
     //jumping off screen when the hero dies
     private Vector2 hitVelocity;
 
-    private int [] platformsArray = {36, 3, 126, 15, 291, 4, 322, 10, 327, 14, 335, 18, 348, 21, 363, 17};   //platform positions
-    private int[] platformMotion = {1, 1, -1, 1, -1, 1, -1, 0};  //1: starting moving from left, -1: moving right, 0: not moving
-    private int [] invisibleFloorsArray = {198, 0, 200, 0, 202, 0, 204, 0, 206, 0, 208, 0, 210, 0, 212, 0, 214, 0, 216, 0};
-    private int [] fallingPlatformsArray = { 20, 3 , 70, 3, 75, 3, 80, 3, 85, 3, 152, 10 };
-    private int [] enemiesArray = {57, 2, 262, 3, 305, 10};//, 269, 3};
-    private int [] boxesArray = {171, 3, 241, 2};
-    private int [] trapsArray = {178, 2};
-    private int [] invisiblesArray = {304, 13};
-    private int [] coinArray = {1, 2, 3, 2, 5, 2, 7, 2, 37, 9, 58, 3, 184, 2, 186, 2, 188, 2, 190, 2, 192, 2, 194, 2};
+    private int[][] platformsArray = {
+            {36, 3}, {126, 15}, {291, 4}, {322, 10},
+            {327, 14}, {335, 18}, {348, 21}, {363, 17}
+    };   //platform hard-coded positions
+    private int[] platformMotion = {
+            1, 1, -1, 1, -1, 1, -1, 0
+    };  //1: starting moving from left, -1: moving right, 0: not moving
+    private int[][] invisibleFloorsArray = {
+            {198, 0}, {200, 0}, {202, 0}, {204, 0},
+            {206, 0}, {208, 0}, {210, 0}, {212, 0},
+            {214, 0}, {216, 0}
+    };
+    private int[][] fallingPlatformsArray = {
+            {20, 3}, {70, 3}, {75, 3}, {80, 3},
+            {85, 3}, {152, 10}
+    };
+    private int[][] enemiesArray = {
+            {57, 2}, {262, 3}, {309, 10}
+    };//, 269, 3};
+    private int[][] boxesArray = {
+            {171, 3}, {241, 2}
+    };
+    private int[][] trapsArray = {
+            {178, 2}
+    };
+    private int[][] invisiblesArray = {
+            {304, 13}
+    };
+    private int[][] coinArray = {
+            {1, 2}, {3, 2}, {5, 2},
+            {7, 2}, {37, 9}, {58, 3},
+            {184, 2}, {186, 2}, {188, 2},
+            {190, 2}, {192, 2}, {194, 2}
+    };
 
 
     public World(Hud hud, MarumGame game){
@@ -62,14 +91,15 @@ public class World {
         marum = new Marum(game);  // the game hero
         hitVelocity = new Vector2(0, 30);
 
-        this.invisibleFloors = new ArrayList<InvisibleFloor>();
-        this.platforms = new ArrayList<Platform>();
-        this.fallingPlatforms = new ArrayList<FallingPlatform>();
-        this.enemies = new ArrayList<Enemy>();
-        this.boxes = new ArrayList<Box>();
-        this.traps = new ArrayList<Trap>();
-        this.invisibles = new ArrayList<Invisible>();
-        this.coins = new ArrayList<Coin>();
+        invisibleFloors = new ArrayList<InvisibleFloor>();
+        platforms = new ArrayList<Platform>();
+        fallingPlatforms = new ArrayList<FallingPlatform>();
+        enemies = new ArrayList<Enemy>();
+        boxes = new ArrayList<Box>();
+        traps = new ArrayList<Trap>();
+        invisibles = new ArrayList<Invisible>();
+        coins = new ArrayList<Coin>();
+        gameObjects = new LinkedList<GameSprite>();
 
         worldCreation();
     }
@@ -78,28 +108,8 @@ public class World {
         // update the hero (process input, collision detection with tiles, position update)
         marum.update(delta);
 
-        for (Platform platform : platforms){
-            platform.update(delta);
-        }
-
-        for (FallingPlatform fallingPlatform : fallingPlatforms){
-            fallingPlatform.update();
-        }
-
-        for (Enemy enemy : enemies){
-            enemy.update(delta);
-        }
-
-        for (Box box : boxes){
-            box.update(delta);
-        }
-
-        for (Trap trap : traps){
-            trap.update(delta);
-        }
-
-        for (Coin coin : coins){
-            coin.update(delta);
+        for (GameSprite gameObject : gameObjects){
+            gameObject.update(delta);
         }
 
         marum.setBounds(delta);
@@ -112,6 +122,7 @@ public class World {
         heroTrapInteraction();
         heroCoinInteraction();
         checkFalling();
+        isTimeUp();
     }
 
     private void heroBoxInteraction() {
@@ -131,8 +142,8 @@ public class World {
                     }
                 }
 
-                if (marum.getPosition().y > box.getPosition().y && marum.getVelocity().y < 0) {  //in order to not jump double distance
-
+                //in order to not jump double distance
+                if (marum.getPosition().y > box.getPosition().y && marum.getVelocity().y < 0) {
                     marum.getPosition().y = box.getPosition().y + box.getHeight();
                     marum.setGrounded(true);
                     marum.getVelocity().y = 0;
@@ -166,9 +177,8 @@ public class World {
     private void heroPlatformsInteraction(){
         for (Platform platform : platforms){
             if (marum.getBounds().overlaps(platform.getBounds())) {
-
-                if (marum.getPosition().y > platform.getPosition().y && marum.getVelocity().y < 0) {  //so dont jump double distance
-
+                // in order to not double jump
+                if (marum.getPosition().y > platform.getPosition().y && marum.getVelocity().y < 0) {
                     marum.getPosition().y = platform.getPosition().y + platform.getHeight();
                     marum.setGrounded(true);
                     marum.getVelocity().y = 0;
@@ -230,58 +240,72 @@ public class World {
         }
     }
 
+    private void isTimeUp(){
+        if (hud.isTimeUp())
+            heroFalltoDeath();
+    }
+
 
     // creation of the world's objects
     private void worldCreation(){
         int j = 0;  // for the direction of platform
-        for (int i = 0; i < platformsArray.length - 1; i += 2) {
+
+        for (int[] pArray : platformsArray) {
             platform = new Platform(game);
-            platform.setPosition(platformsArray[i], platformsArray[i+1]);
-            platform.setMotion (platformMotion[j]);  //set the direction
+            platform.setPosition(pArray[0], pArray[1]);
+            platform.setMotion(platformMotion[j]);  //set the direction
             platforms.add(platform);
+            gameObjects.add(platform);
             j++;
         }
 
-        for (int i = 0; i < invisibleFloorsArray.length - 1; i += 2) {
+        for (int[] iArray : invisibleFloorsArray) {
             invisibleFloor = new InvisibleFloor(game);
-            invisibleFloor.setPosition(invisibleFloorsArray[i], invisibleFloorsArray[i+1]);
+            invisibleFloor.setPosition(iArray[0], iArray[1]);
             invisibleFloors.add(invisibleFloor);
+            gameObjects.add(invisibleFloor);
         }
 
-        for (int i = 0; i < fallingPlatformsArray.length - 1; i += 2) {
+        for (int[] fArray : fallingPlatformsArray) {
             fallingPlatform = new FallingPlatform(game);
-            fallingPlatform.setPosition(fallingPlatformsArray[i], fallingPlatformsArray[i+1]);
+            fallingPlatform.setPosition(fArray[0], fArray[1]);
             fallingPlatforms.add(fallingPlatform);
+            gameObjects.add(fallingPlatform);
         }
 
-        for (int i = 0; i < enemiesArray.length - 1; i += 2) {
+        for (int[] eArray : enemiesArray) {
             enemy = new Enemy(game);
-            enemy.setPosition(enemiesArray[i], enemiesArray[i+1]);
+            enemy.setPosition(eArray[0], eArray[1]);
             enemies.add(enemy);
+            gameObjects.add(enemy);
         }
 
-        for (int i = 0; i < boxesArray.length - 1; i += 2) {
+        for (int[] bArray : boxesArray) {
             box = new Box(game);
-            box.setPosition(boxesArray[i], boxesArray[i+1]);
+            box.setPosition(bArray[0], bArray[1]);
             boxes.add(box);
+            gameObjects.add(box);
         }
 
-        for (int i = 0; i < trapsArray.length - 1; i += 2) {
+        for (int[] tArray : trapsArray) {
             trap = new Trap(game);
-            trap.setPosition(trapsArray[i], trapsArray[i + 1]);
+            trap.setPosition(tArray[0], tArray[1]);
             traps.add(trap);
+            gameObjects.add(trap);
         }
 
-        for (int i = 0; i < invisiblesArray.length - 1; i += 2) {
+        for (int[] iArray : invisiblesArray) {
             invisible = new Invisible(game);
-            invisible.setPosition(invisiblesArray[i], invisiblesArray[i+1]);
+            invisible.setPosition(iArray[0], iArray[1]);
             invisibles.add(invisible);
+            gameObjects.add(invisible);
         }
 
-        for (int i = 0; i < coinArray.length - 1; i +=2 ) {
+        for (int[] cArray : coinArray) {
             coin = new Coin(game);
-            coin.setPosition(coinArray[i], coinArray[i+1]);
+            coin.setPosition(cArray[0], cArray[1]);
             coins.add(coin);
+            gameObjects.add(coin);
         }
     }
 

@@ -9,17 +9,17 @@ import com.badlogic.gdx.utils.Array;
 import com.marum.game.MarumGame;
 import com.marum.game.support.Tiles;
 
-public class DynamicGameSprite extends GameSprite {
+public abstract class DynamicGameSprite extends GameSprite {
     protected final Vector2 velocity;
     protected final float GRAVITY = -2.1f;
     protected float DAMPING = 0.4f;
     protected float width;
     protected float height;
     protected int startX, startY, endX, endY;
+    protected boolean boxStuck = false;
+    protected boolean grounded = false;
     private Tiles tile;
     private Array<Rectangle> tiles;
-    public boolean boxStuck = false;
-    public boolean grounded = false;
 
 
     public DynamicGameSprite (float width, float height, MarumGame game) {
@@ -35,7 +35,7 @@ public class DynamicGameSprite extends GameSprite {
         return velocity;
     }
 
-    public void collisionDetectionXaxis() {
+    protected void collisionDetectionXaxis() {
 
         // perform collision detection & response, on each axis, separately
         // if the object is moving right, check the tiles to the right of it's
@@ -61,7 +61,7 @@ public class DynamicGameSprite extends GameSprite {
         bounds.x = position.x;
     }
 
-    public void collisionDetectionYaxis() {
+    protected void collisionDetectionYaxis() {
 
         // if it is moving upwards, check the tiles to the top of its
         // top bounding box edge, otherwise check the ones to the bottom

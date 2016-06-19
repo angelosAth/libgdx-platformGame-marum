@@ -17,6 +17,7 @@ import com.marum.game.sprites.Trap;
 import com.marum.game.support.Hud;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -27,13 +28,29 @@ public class GameRenderer {
     private OrthographicCamera cam;
     private MarumGame game;
     private ShapeRenderer debugRenderer;
-
+    private List <Box> boxes;
+    private List <Platform> platforms;
+    private List <Enemy> enemies;
+    private List <Invisible> invisibles;
+    private List <InvisibleFloor> invisibleFloors;
+    private List <Trap> traps;
+    private List <Coin> coins;
+    private List <FallingPlatform> fallingPlatforms;
 
     public GameRenderer(World world, MarumGame game) {
         this.world = world;
         this.game = game;
+        boxes = new ArrayList<Box>(world.getBox());
+        platforms = new ArrayList<Platform>(world.getPlatform());
+        enemies = new ArrayList<Enemy>(world.getEnemy());
+        invisibles = new ArrayList<Invisible>(world.getInvisible());
+        invisibleFloors = new ArrayList<InvisibleFloor>(world.getInvisibleFloor());
+        traps = new ArrayList<Trap>(world.getTrap());
+        coins = new ArrayList<Coin>(world.getCoin());
+        fallingPlatforms = new ArrayList<FallingPlatform>(world.getFallingPlatform());
+
         cam = new OrthographicCamera();
-        cam.setToOrtho(false, 30, 20);  //30  20
+        cam.setToOrtho(false, 30, 20);
         debugRenderer = new ShapeRenderer();
     }
 
@@ -76,17 +93,17 @@ public class GameRenderer {
             game.batch.draw(world.getMarum().getFrames(), world.getMarum().getPosition().x + world.getMarum().getWidth(),
                     world.getMarum().getPosition().y, -world.getMarum().getWidth(), world.getMarum().getHeight());
 
-        for (Box box : (new ArrayList<Box>(world.getBox()))){
+        for (Box box : boxes){
             game.batch.draw(box.getSprite(), box.getPosition().x,
                     box.getPosition().y, box.getWidth(), box.getHeight());
         }
 
-        for (Platform platform : (new ArrayList<Platform>(world.getPlatform()))){
+        for (Platform platform : platforms){
             game.batch.draw(platform.getSprite(), platform.getPosition().x,
                     platform.getPosition().y, platform.getWidth(), platform.getHeight());
         }
 
-        for (Enemy enemy : (new ArrayList<Enemy>(world.getEnemy()))){
+        for (Enemy enemy : enemies){
             if (enemy.isEnemyRight())
                 game.batch.draw(enemy.getFrames(), enemy.getPosition().x,
                         enemy.getPosition().y, enemy.getWidth(), enemy.getHeight());
@@ -95,28 +112,28 @@ public class GameRenderer {
                         enemy.getPosition().y, -enemy.getWidth(), enemy.getHeight());
         }
 
-        for (Invisible invisible : (new ArrayList<Invisible>(world.getInvisible()))){
+        for (Invisible invisible : invisibles){
             if (invisible.isHit()) {
                 game.batch.draw(invisible.getSprite(), invisible.getPosition().x, invisible.getPosition().y,
                         invisible.getWidth(), invisible.getHeight());
             }
         }
 
-        for (InvisibleFloor invisibleFloor : (new ArrayList<InvisibleFloor>(world.getInvisibleFloor()))){
+        for (InvisibleFloor invisibleFloor : invisibleFloors){
             if (invisibleFloor.isHit()) {
                 game.batch.draw(invisibleFloor.getSprite(), invisibleFloor.getPosition().x,
                         invisibleFloor.getPosition().y, invisibleFloor.getWidth(), invisibleFloor.getHeight());
             }
         }
 
-        for (Coin coin : (new ArrayList<Coin>(world.getCoin()))){
+        for (Coin coin : coins){
             if (coin.isNotPicked()) {
                 game.batch.draw(coin.getFrames(), coin.getPosition().x,
                         coin.getPosition().y, coin.getWidth(), coin.getHeight());
             }
         }
 
-        for (Trap trap : (new ArrayList<Trap>(world.getTrap()))){
+        for (Trap trap : traps){
             if (trap.isHit()) {
                 game.batch.draw(trap.getSpriteAfter(), trap.getPosition().x,
                         trap.getPosition().y, trap.getWidth(), trap.getHeight());
@@ -127,7 +144,7 @@ public class GameRenderer {
             }
         }
 
-        for (FallingPlatform fallingPlatform : (new ArrayList<FallingPlatform>(world.getFallingPlatform()))){
+        for (FallingPlatform fallingPlatform : fallingPlatforms){
             game.batch.draw(fallingPlatform.getSprite(), fallingPlatform.getPosition().x,
                     fallingPlatform.getPosition().y, fallingPlatform.getWidth(), fallingPlatform.getHeight());
         }
