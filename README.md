@@ -3,7 +3,7 @@ Platform game in libgdx
 
 in progress!!!
 
-Installation
+Running
 -------------
 This project was made in Android Studio. One way to run this project is by opening Android Studio and from the Quick Start menu choose the Import project(Eclipse ADT, Gradle, etc).
 
